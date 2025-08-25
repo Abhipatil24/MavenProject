@@ -19,21 +19,21 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            emailext(
-                to: 'patil2001abhishek@gmail.com',
-                subject: "Jenkins Pipeline: ${currentBuild.fullDisplayName} - ${currentBuild.currentResult}",
-                body: """<p>Hello Abhishek,</p>
-                         <p>Your Jenkins pipeline has finished running.</p>
-                         <p><b>Status:</b> ${currentBuild.currentResult}</p>
-                         <p><b>Job:</b> ${env.JOB_NAME}</p>
-                         <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
-                         <p>Check the console output: 
-                         <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
-                mimeType: 'text/html'
-            )
-        }
+ post {
+    always {
+        emailext(
+            to: 'patil2001abhishek@gmail.com',
+            from: 'patil2001abhishek@gmail.com',
+            subject: "Pipeline: ${currentBuild.fullDisplayName} - ${currentBuild.currentResult}",
+            body: """<p>Hello Abhishek,</p>
+                     <p>Your Jenkins pipeline has finished.</p>
+                     <p><b>Status:</b> ${currentBuild.currentResult}</p>
+                     <p><b>Job:</b> ${env.JOB_NAME}</p>
+                     <p><b>Build URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
+            mimeType: 'text/html'
+        )
     }
+}
+
 }
 
